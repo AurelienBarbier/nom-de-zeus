@@ -22,12 +22,12 @@ class TimeTravel
      */
     private $start;
 
-
-
     /**
      * @var DateTime
      */
     private $end;
+
+    const TRAVEL_INFO = 'Il y a %d années, %d mois, %d jours, %d heures, %d minutes et %d secondes entre les deux dates';
 
 
     /**
@@ -35,10 +35,10 @@ class TimeTravel
      * @param DateTime $start
      * @param DateTime $end
      */
-    public function __construct(\DateTime $start, \DateTime $end)
+    public function __construct(\DateTime $start, \DateTime $end = null)
     {
         $this->start = $start;
-        $this->end   = $end;
+        $this->end = $end;
     }
 
     /**
@@ -71,5 +71,19 @@ class TimeTravel
     public function setEnd(\DateTime $end): void
     {
         $this->end = $end;
+    }
+
+
+    public function getTravelInfo(): string
+    {
+        $insterval = $this->start->diff($this->end);
+        return printf(self::TRAVEL_INFO,
+            $insterval->y,
+            $insterval->m,
+            $insterval->d,
+            $insterval->h,
+            $insterval->i,
+            $insterval->s
+        );
     }
 }
