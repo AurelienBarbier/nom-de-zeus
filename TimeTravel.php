@@ -74,16 +74,30 @@ class TimeTravel
     }
 
 
+    /**
+     * @return string
+     */
     public function getTravelInfo(): string
     {
-        $insterval = $this->start->diff($this->end);
+        $interval = $this->start->diff($this->end);
         return printf(self::TRAVEL_INFO,
-            $insterval->y,
-            $insterval->m,
-            $insterval->d,
-            $insterval->h,
-            $insterval->i,
-            $insterval->s
+            $interval->y,
+            $interval->m,
+            $interval->d,
+            $interval->h,
+            $interval->i,
+            $interval->s
         );
+    }
+
+    /**
+     * @param \DateInterval $interval
+     * @return DateTime
+     */
+    public function findDate(\DateInterval $interval) : \DateTime
+    {
+        $reference = new \DateTime($this->getStart()->format('Y-m-d'));
+        $date = $reference->add($interval);
+        return $date;
     }
 }
