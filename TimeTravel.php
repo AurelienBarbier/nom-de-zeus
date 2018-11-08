@@ -30,7 +30,8 @@ class TimeTravel
     /**
      *
      */
-    const TRAVEL_INFO_FORMAT = 'Il y a %d années, %d mois, %d jours, %d heures, %d minutes et %d secondes entre les deux dates';
+    const TRAVEL_INFO_FORMAT = 'Il y a %d années, %d mois, %d jours, %d heures, %d minutes et %d secondes 
+                                entre les deux dates';
 
     const STEP_FORMAT = 'M d Y A h:i';
 
@@ -84,7 +85,8 @@ class TimeTravel
     public function getTravelInfo(): string
     {
         $interval = $this->start->diff($this->end);
-        return printf(self::TRAVEL_INFO_FORMAT,
+        return sprintf(
+            self::TRAVEL_INFO_FORMAT,
             $interval->y,
             $interval->m,
             $interval->d,
@@ -117,13 +119,10 @@ class TimeTravel
         /**
          * @var \DateTime $period
          */
-        foreach ($periods as $period)
-        {
+        foreach ($periods as $period) {
             $steps[] = $period->format(self::STEP_FORMAT);
         }
 
         return $steps;
     }
 }
-
-
